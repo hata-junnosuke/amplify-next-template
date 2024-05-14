@@ -5,15 +5,13 @@ import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
 import "./../app/app.css";
 import { Amplify } from "aws-amplify";
-// import outputs from "@/amplify_outputs.json";
-import config from '@/amplifyconfiguration.json';
+import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
 
 import * as mutations from '../src/graphql/mutations';
 import * as queries from '../src/graphql/queries';
 
-// Amplify.configure(outputs);
-Amplify.configure(config);
+Amplify.configure(outputs);
 
 const client = generateClient<Schema>();
 

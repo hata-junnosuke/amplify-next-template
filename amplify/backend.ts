@@ -1,8 +1,10 @@
 import { defineBackend } from '@aws-amplify/backend';
-import { auth } from './auth/resource.js';
-import { data } from './data/resource.js';
+import { data } from './data/resource';
 
-defineBackend({
-  auth,
-  data,
+const backend = defineBackend({
+  data
 });
+
+const dataResources = backend.data.resources;
+
+dataResources.cfnResources.cfnGraphqlApi.xrayEnabled = true;

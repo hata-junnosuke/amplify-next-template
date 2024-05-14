@@ -13,6 +13,9 @@ const schema = a.schema({
     created_at: a.date() || null,
     id: a.integer() || null,
   }),
+  listTodos: a.customType({
+    orderBy: a.ref("OrderByTodosInput") || null,
+  }),
   Todo: a
     .model({
       name: a.string(),

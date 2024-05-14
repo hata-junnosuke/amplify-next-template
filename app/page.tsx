@@ -5,20 +5,27 @@ import { generateClient } from "aws-amplify/data";
 import type { Schema } from "@/amplify/data/resource";
 import "./../app/app.css";
 import { Amplify } from "aws-amplify";
-import outputs from "@/amplify_outputs.json";
+// import outputs from "@/amplify_outputs.json";
+import config from '@/amplifyconfiguration.json';
 import "@aws-amplify/ui-react/styles.css";
 
-Amplify.configure(outputs);
+import * as mutations from '../src/graphql/mutations';
+import * as queries from '../src/graphql/queries';
+
+// Amplify.configure(outputs);
+Amplify.configure(config);
 
 const client = generateClient<Schema>();
 
 export default function App() {
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
 
-  function listTodos() {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
+  async function listTodos() {
+    const { data, errors } = await client.graphql({
+      query: queries.listTodos
     });
+    const todos: any = data?.listTodos?.items ?? [];
+    setTodos(todos);
   }
 
   useEffect(() => {
@@ -26,8 +33,13 @@ export default function App() {
   }, []);
 
   function createTodo() {
-    client.models.Todo.create({
-      content: window.prompt("Todo content"),
+    client.graphql({
+      query: mutations.createTodos,
+      variables: {
+        input: {
+          name: window.prompt("Todo content")?.toString() ?? '',
+        }
+      }
     });
   }
 
@@ -37,7 +49,7 @@ export default function App() {
       <button onClick={createTodo}>+ new</button>
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
+          <li key={todo.id}>{todo.name}</li>
         ))}
       </ul>
       <div>

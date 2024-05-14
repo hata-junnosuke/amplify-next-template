@@ -13,8 +13,17 @@ const schema = a.schema({
     created_at: a.date() || null,
     id: a.integer() || null,
   }),
+  TableTodosFilterInput: a.customType({
+    name: a.string() || null,
+    description: a.string() || null,
+    created_at: a.date() || null,
+    id: a.integer() || null,
+  }),
   listTodos: a.customType({
-    orderBy: a.ref("OrderByTodosInput") || null,
+      filter: a.ref("TableTodosFilterInput") || null,
+      limit: a.integer() || null,
+      orderBy: a.ref("OrderByTodosInput") || null,
+      nextToken: a.string() || null,
   }),
   Todo: a
     .model({

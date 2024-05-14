@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { generateClient } from "aws-amplify/data";
-// import type { Schema } from "@/amplify/data/resource";
+import type { Schema } from "@/amplify/data/resource";
 import "./../app/app.css";
 import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
@@ -13,10 +13,10 @@ import * as queries from '../src/graphql/queries';
 
 Amplify.configure(outputs);
 
-const client = generateClient();
+const client = generateClient<Schema>();
 
 export default function App() {
-  const [todos, setTodos] = useState<Array<any>>([]);
+  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
 
   async function listTodos() {
     const { data, errors } = await client.graphql({

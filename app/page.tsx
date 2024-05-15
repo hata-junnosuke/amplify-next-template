@@ -2,21 +2,25 @@
 
 import { useState, useEffect } from "react";
 import { generateClient } from "aws-amplify/data";
-import type { Schema } from "@/amplify/data/resource";
+// import type { Schema } from "@/amplify/data/resource";
 import "./../app/app.css";
 import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
+import config from '../aws-exports.js';
+
+// @ts-ignore
+Amplify.configure(config);
 
 import * as mutations from '../src/graphql/mutations';
 import * as queries from '../src/graphql/queries';
 
-Amplify.configure(outputs);
+// Amplify.configure(outputs);
 
-const client = generateClient<Schema>();
+const client = generateClient();
 
 export default function App() {
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+  const [todos, setTodos] = useState([]);
 
   async function listTodos() {
     const { data, errors } = await client.graphql({
@@ -47,6 +51,7 @@ export default function App() {
       <button onClick={createTodo}>+ new</button>
       <ul>
         {todos.map((todo) => (
+          // @ts-ignore
           <li key={todo.id}>{todo.name}</li>
         ))}
       </ul>

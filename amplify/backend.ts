@@ -8,7 +8,7 @@ const backend = defineBackend({
 });
 
 backend.addOutput({
-  API: {
+  data: {
     GraphQL: {
       endpoint: `https://${process.env.NEXT_PUBLIC_ENDPOINT}.appsync-api.ap-northeast-1.amazonaws.com/graphql`,
       region: 'ap-northeast-1',

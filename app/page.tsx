@@ -10,12 +10,9 @@ import "@aws-amplify/ui-react/styles.css";
 import config from '../aws-exports.js';
 import { Authenticator } from '@aws-amplify/ui-react'
 
-const mergedConfig = {
-  ...config,
-  ...outputs,
-};
 // @ts-ignore
-Amplify.configure(mergedConfig);
+// Amplify.configure(config);
+Amplify.configure(outputs);
 
 import * as mutations from '../src/graphql/mutations';
 import * as queries from '../src/graphql/queries';
@@ -68,26 +65,42 @@ export default function App() {
 
 
   return (
-    <Authenticator>
-      {({ signOut, user }) => (
-      <main>
-        <h1>My todos</h1>
-        <button onClick={createTodo}>+ new</button>
-        <ul>
-          {todos.map((todo) => (
-            <li  onClick={() => deleteTodos(todo.id)} key={todo.id}>{todo.name}</li>
-            ))}
-        </ul>
-        <div>
-          🥳 App successfully hosted. Try creating a new todo.
-          <br />
-          <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
-            Review next steps of this tutorial.
-          </a>
-        </div>
-        <button onClick={signOut}>Sign out</button>
-      </main>
-    )}
-    </Authenticator>
+    // <Authenticator>
+    //   {({ signOut, user }) => (
+    //   <main>
+    //     <h1>My todos</h1>
+    //     <button onClick={createTodo}>+ new</button>
+    //     <ul>
+    //       {todos.map((todo) => (
+    //         <li  onClick={() => deleteTodos(todo.id)} key={todo.id}>{todo.name}</li>
+    //         ))}
+    //     </ul>
+    //     <div>
+    //       🥳 App successfully hosted. Try creating a new todo.
+    //       <br />
+    //       <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
+    //         Review next steps of this tutorial.
+    //       </a>
+    //     </div>
+    //     <button onClick={signOut}>Sign out</button>
+    //   </main>
+    // )}
+    // </Authenticator>
+    <main>
+      <h1>My todos</h1>
+      <button onClick={createTodo}>+ new</button>
+      <ul>
+        {todos.map((todo) => (
+          <li  onClick={() => deleteTodos(todo.id)} key={todo.id}>{todo.name}</li>
+          ))}
+      </ul>
+      <div>
+        🥳 App successfully hosted. Try creating a new todo.
+        <br />
+        <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
+          Review next steps of this tutorial.
+        </a>
+      </div>
+    </main>
   );
 }

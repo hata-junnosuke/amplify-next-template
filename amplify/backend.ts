@@ -9,11 +9,9 @@ const backend = defineBackend({
 
 backend.addOutput({
   data: {
-    GraphQL: {
-      endpoint: `https://${process.env.NEXT_PUBLIC_ENDPOINT}.appsync-api.ap-northeast-1.amazonaws.com/graphql`,
-      region: 'ap-northeast-1',
-      defaultAuthMode: 'apiKey',
-      apiKey: process.env.NEXT_PUBLIC_API_KEY,
-    }
+    url: `https://${process.env.NEXT_PUBLIC_ENDPOINT}.appsync-api.ap-northeast-1.amazonaws.com/graphql`,
+    aws_region: 'ap-northeast-1',
+    default_authorization_type: 'API_KEY',
+    api_key: process.env.NEXT_PUBLIC_API_KEY,
   }
 }as any);

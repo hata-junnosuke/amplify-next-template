@@ -13,9 +13,10 @@ export const auth = defineAuth({
         clientSecret: secret('GOOGLE_CLIENT_SECRET')
       },
       callbackUrls: [
-        'http://localhost:3001/', 'https://main.dth38tt6o3lkg.amplifyapp.com/',
+        'http://localhost:3001/',
+        'https://main.dth38tt6o3lkg.amplifyapp.com/',
       ],
-      logoutUrls: ['http://localhost:3001/, https://main.dth38tt6o3lkg.amplifyapp.com/'],
+      logoutUrls: ['http://localhost:3001/', 'https://main.dth38tt6o3lkg.amplifyapp.com/'],
     },
   },
 });

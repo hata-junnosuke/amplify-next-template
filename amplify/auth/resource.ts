@@ -6,17 +6,6 @@ import { defineAuth } from "@aws-amplify/backend";
  */
 export const auth = defineAuth({
   loginWith: {
-    externalProviders: {
-      google: {
-        // @ts-ignore
-        clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-        // @ts-ignore
-        clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET,
-      },
-      callbackUrls: [
-        'http://localhost:3001'
-      ],
-      logoutUrls: ['http://localhost:3001'],
-    }
+    email: true,
   },
 });

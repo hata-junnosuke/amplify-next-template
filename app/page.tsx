@@ -62,7 +62,7 @@ export default function App() {
 
 
   return (
-    <Authenticator>
+    <Authenticator socialProviders={['google']} hideSignUp >
       {({ signOut, user }) => (
       <main>
         <h1>My todos</h1>
